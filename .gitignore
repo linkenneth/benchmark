@@ -1,0 +1,6 @@
+*.class
+*.so
+*.pyc
+__pycache__
+#*#
+auto
