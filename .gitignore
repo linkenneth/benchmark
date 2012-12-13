@@ -6,6 +6,6 @@
 *.exe
 __pycache__
 #*#
+*~
 auto
 */hs/fibs
-*/hs/fibs.exe

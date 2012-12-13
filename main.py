@@ -11,6 +11,7 @@ TEST_ROUNDS = 10
 JS_RUN = "node"
 HS_RUN = "runhaskell"
 BIN_RUN = "./execbin.sh"
+PYTHON_RUN = "python"
 
 FIBS_DIR = "fibs/"
 
@@ -19,13 +20,15 @@ FIBS_ITER = 35
 RUN_CMDS = {
     "js" : JS_RUN,
     "hs" : HS_RUN,
-    "hsc" : BIN_RUN
+    "hsc" : BIN_RUN,
+    "py" : PYTHON_RUN
     }
 TEST_CMDS = {
     "fibs" : {
         "js" : FIBS_DIR + "js/fibs.js",
         "hs" : FIBS_DIR + "hs/fibs.hs",
-        "hsc" : FIBS_DIR + "hs/fibs"
+        "hsc" : FIBS_DIR + "hs/fibs",
+        "py" : FIBS_DIR + "py/fibs.py"
         }
     }
 ITERATIONS = {
