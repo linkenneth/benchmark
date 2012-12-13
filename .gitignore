@@ -1,6 +1,9 @@
 *.class
 *.so
 *.pyc
+*.o
+*.hi
+*.exe
 __pycache__
 #*#
 auto
