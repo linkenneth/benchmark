@@ -1,3 +1,4 @@
+#!/usr/bin/python
 ## Starts the benchmark suite.
 
 import getopt, sys, time, subprocess
@@ -8,15 +9,23 @@ WARMUP_ROUNDS = 2
 TEST_ROUNDS = 10
 
 JS_RUN = "node"
+HS_RUN = "runhaskell"
+BIN_RUN = "./execbin.sh"
 
 FIBS_DIR = "fibs/"
 
-FIBS_ITER = 15
+FIBS_ITER = 35
 
-RUN_CMDS = { "js" : JS_RUN }
+RUN_CMDS = {
+    "js" : JS_RUN,
+    "hs" : HS_RUN,
+    "hsc" : BIN_RUN
+    }
 TEST_CMDS = {
     "fibs" : {
-        "js" : FIBS_DIR + "js/fibs.js"
+        "js" : FIBS_DIR + "js/fibs.js",
+        "hs" : FIBS_DIR + "hs/fibs.hs",
+        "hsc" : FIBS_DIR + "hs/fibs"
         }
     }
 ITERATIONS = {
