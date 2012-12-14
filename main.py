@@ -15,6 +15,7 @@ PYTHON_RUN = "python"
 JAVA_RUN = "java"
 JAVA_OPT = "-cp"
 RUBY_RUN = "ruby"
+BASH_RUN = "bash"
 
 FIBS_DIR = "fibs/"
 
@@ -27,7 +28,8 @@ RUN_CMDS = {
     "py" : [ PYTHON_RUN ],
     # "cy" : [ BIN_RUN ],
     "java" : [ JAVA_RUN, JAVA_OPT ],
-    "rb" : [ RUBY_RUN ]
+    "rb" : [ RUBY_RUN ],
+    "bash" : [ BASH_RUN ]
     }
 RUN_LOCATIONS = {
     "fibs" : {
@@ -37,7 +39,8 @@ RUN_LOCATIONS = {
         "py" : [ FIBS_DIR + "py/fibs.py" ],
         # "cy" : [ FIBS_DIR + "cy/fibs.so" ],
         "java" : [ FIBS_DIR + "java", "Fibs" ],
-        "rb" : [ FIBS_DIR + "rb/fibs.rb" ]
+        "rb" : [ FIBS_DIR + "rb/fibs.rb" ],
+        "bash" : [ FIBS_DIR + "bash/fibs.sh" ]
         }
     }
 RUN_ITERATIONS = {
