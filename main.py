@@ -72,7 +72,7 @@ def run(test, language, iterations):
         with Timer() as t:
             subprocess.check_call(run_cmd +
                                   run_location +
-                                  [ run_iteration ],
+                                 [ run_iteration ],
                                   stdout = subprocess.PIPE)
         print "Running '%s' with %s - time taken: %.4f seconds" % \
             (test, language, t.interval)
