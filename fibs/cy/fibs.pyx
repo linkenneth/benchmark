@@ -6,4 +6,8 @@ def fibs(long long n):
     else:
         return fibs(n - 1) + fibs(n - 2)
 
-print fibs(int(sys.argv[1]))
+def main():
+    print fibs(int(sys.argv[1]))
+
+if __name__ == "__main__":
+    main()
