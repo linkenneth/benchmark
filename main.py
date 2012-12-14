@@ -12,26 +12,32 @@ JS_RUN = "node"
 HS_RUN = "runhaskell"
 BIN_RUN = "./execbin.sh"
 PYTHON_RUN = "python"
+JAVA_RUN = "java"
+JAVA_OPT = "-cp"
 
 FIBS_DIR = "fibs/"
 
 FIBS_ITER = 35
 
 RUN_CMDS = {
-    "js" : JS_RUN,
-    "hs" : HS_RUN,
-    "hsc" : BIN_RUN,
-    "py" : PYTHON_RUN
+    "js" : [ JS_RUN ],
+    "hs" : [ HS_RUN ],
+    "hsc" : [ BIN_RUN ],
+    "py" : [ PYTHON_RUN ],
+    # "cy" : [ BIN_RUN ]
+    "java" : [ JAVA_RUN, JAVA_OPT ]
     }
-TEST_CMDS = {
+RUN_LOCATIONS = {
     "fibs" : {
-        "js" : FIBS_DIR + "js/fibs.js",
-        "hs" : FIBS_DIR + "hs/fibs.hs",
-        "hsc" : FIBS_DIR + "hs/fibs",
-        "py" : FIBS_DIR + "py/fibs.py"
+        "js" : [ FIBS_DIR + "js/fibs.js" ],
+        "hs" : [ FIBS_DIR + "hs/fibs.hs" ],
+        "hsc" : [ FIBS_DIR + "hs/fibs" ],
+        "py" : [ FIBS_DIR + "py/fibs.py" ],
+        # "cy" : [ FIBS_DIR + "cy/fibs.so" ],
+        "java" : [ FIBS_DIR + "java", "Fibs" ]
         }
     }
-ITERATIONS = {
+RUN_ITERATIONS = {
     "fibs" : str(FIBS_ITER)
     }
 
@@ -49,15 +55,15 @@ def run(test, language):
     used in such a calculation."""
     # TODO : check for languages/tests not supported
     for r in range(WARMUP_ROUNDS):
-        subprocess.check_call([ RUN_CMDS[language],
-                                TEST_CMDS[test][language],
-                                ITERATIONS[test] ],
+        subprocess.check_call(RUN_CMDS[language] +
+                              RUN_LOCATIONS[test][language] +
+                              [ RUN_ITERATIONS[test] ],
                               stdout = subprocess.PIPE)
     for r in range(TEST_ROUNDS):
         with Timer() as t:
-            subprocess.check_call([ RUN_CMDS[language],
-                                    TEST_CMDS[test][language],
-                                    ITERATIONS[test] ],
+            subprocess.check_call(RUN_CMDS[language] +
+                                  RUN_LOCATIONS[test][language] +
+                                  [ RUN_ITERATIONS[test] ],
                                   stdout = subprocess.PIPE)
         print "Running '%s' with %s - time taken: %.4f seconds" % \
             (test, language, t.interval)
