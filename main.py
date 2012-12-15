@@ -26,7 +26,7 @@ RUN_CMDS = {
     "hs" : [ HS_RUN ],
     "hsc" : [ BIN_RUN ],
     "py" : [ PYTHON_RUN ],
-    # "cy" : [ BIN_RUN ],
+    "cy" : [ PYTHON_RUN ],
     "java" : [ JAVA_RUN, JAVA_OPT ],
     "rb" : [ RUBY_RUN ],
     "bash" : [ BASH_RUN ]
@@ -37,7 +37,7 @@ RUN_LOCATIONS = {
         "hs" : [ FIBS_DIR + "hs/fibs.hs" ],
         "hsc" : [ FIBS_DIR + "hs/fibs" ],
         "py" : [ FIBS_DIR + "py/fibs.py" ],
-        # "cy" : [ FIBS_DIR + "cy/fibs.so" ],
+        "cy" : [ FIBS_DIR + "cy/run.py" ],
         "java" : [ FIBS_DIR + "java", "Fibs" ],
         "rb" : [ FIBS_DIR + "rb/fibs.rb" ],
         "bash" : [ FIBS_DIR + "bash/fibs.sh" ]
