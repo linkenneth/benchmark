@@ -1,6 +1,6 @@
 import sys
 
-def fibs(long long n):
+cdef long long fibs(int n):
     if (n <= 1):
         return 1
     else:
