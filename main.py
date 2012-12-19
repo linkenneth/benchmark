@@ -4,7 +4,7 @@
 import getopt, sys, time, subprocess
 
 OPTIONS = ""
-LONG_OPTIONS = [ "help", "fibs=" ]
+LONG_OPTIONS = [ "help", "fibs=", "quicksort=" ]
 WARMUP_ROUNDS = 2
 TEST_ROUNDS = 10
 
@@ -18,8 +18,10 @@ RUBY_RUN = "ruby"
 BASH_RUN = "bash"
 
 FIBS_DIR = "fibs/"
+QUICKSORT_DIR = "quicksort/"
 
 FIBS_ITER = 35
+QUICKSORT_FILE = "data/rand1000000.data"
 
 RUN_CMDS = {
     "js" : [ JS_RUN ],
@@ -29,7 +31,8 @@ RUN_CMDS = {
     "cy" : [ PYTHON_RUN ],
     "java" : [ JAVA_RUN, JAVA_OPT ],
     "rb" : [ RUBY_RUN ],
-    "bash" : [ BASH_RUN ]
+    "bash" : [ BASH_RUN ],
+    "c" : [ BIN_RUN ]
     }
 RUN_LOCATIONS = {
     "fibs" : {
@@ -40,11 +43,16 @@ RUN_LOCATIONS = {
         "cy" : [ FIBS_DIR + "cy/run.py" ],
         "java" : [ FIBS_DIR + "java", "Fibs" ],
         "rb" : [ FIBS_DIR + "rb/fibs.rb" ],
-        "bash" : [ FIBS_DIR + "bash/fibs.sh" ]
+        "bash" : [ FIBS_DIR + "bash/fibs.sh" ],
+        "c" : [ FIBS_DIR + "c/fibs.out" ]
+        },
+    "quicksort" : {
+        "py" : [ QUICKSORT_DIR + "py/quicksort.py" ]
         }
     }
-RUN_ITERATIONS = {
-    "fibs" : str(FIBS_ITER)
+RUN_OPTIONS = {
+    "fibs" : str(FIBS_ITER),
+    "quicksort" : QUICKSORT_FILE
     }
 
 class Timer:
@@ -56,26 +64,26 @@ class Timer:
         self.end = time.time()
         self.interval = self.end - self.start
 
-def run(test, language, iterations):
+def run(test, language, options):
     """Runs TEST using LANGUAGE, times the result, and returns the time
     used in such a calculation."""
     # TODO : check for languages/tests not supported
     run_cmd = RUN_CMDS[language]
     run_location = RUN_LOCATIONS[test][language]
-    if iterations:
-        run_iteration = iterations
+    if options:
+        run_option = options
     else:
-        run_iteration = RUN_ITERATIONS[test]
+        run_option = RUN_OPTIONS[test]
     for r in range(WARMUP_ROUNDS):
         subprocess.check_call(run_cmd +
                               run_location +
-                              [ run_iteration ],
+                              [ run_option ],
                               stdout = subprocess.PIPE)
     for r in range(TEST_ROUNDS):
         with Timer() as t:
             subprocess.check_call(run_cmd +
                                   run_location +
-                                 [ run_iteration ],
+                                 [ run_option ],
                                   stdout = subprocess.PIPE)
         print "Running '%s' with %s - time taken: %.4f seconds" % \
             (test, language, t.interval)
@@ -83,9 +91,11 @@ def run(test, language, iterations):
 def usage():
     """Prints the usage info for this benchmark suite."""
     print >>sys.stderr, """\
-Usage: python main.py [--test iterations] [language ...]
-    where test is a test and language is a language, and iterations is...
-    wait for it... the number of iterations to run for a given test.
+Usage: python main.py [--test options] [language ...]
+    where test is a test and language is a language, and options is...
+    wait for it... the options to run for a given test. Options could be the
+    number of iterations to run for or the file to sort, or whatever the test
+    requires.
 """
     sys.exit(2)
 
