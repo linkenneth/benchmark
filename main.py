@@ -20,6 +20,7 @@ BASH_RUN = "bash"
 FIBS_DIR = "fibs/"
 QUICKSORT_DIR = "quicksort/"
 
+# Suggested or default run options
 FIBS_ITER = 35
 QUICKSORT_FILE = "data/rand1000000.data"
 
@@ -47,7 +48,8 @@ RUN_LOCATIONS = {
         "c" : [ FIBS_DIR + "c/fibs.out" ]
         },
     "quicksort" : {
-        "py" : [ QUICKSORT_DIR + "py/quicksort.py" ]
+        "py" : [ QUICKSORT_DIR + "py/quicksort.py" ],
+        "java" : [ QUICKSORT_DIR + "java", "QuickSort" ]
         }
     }
 RUN_OPTIONS = {
