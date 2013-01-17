@@ -18,6 +18,7 @@ public class QuickSort {
         A.set(pivotIndex, null);
         List<Integer> less = new ArrayList<Integer>();
         List<Integer> greater = new ArrayList<Integer>();
+
         for (Integer x : A) {
             if (x == null) {
                 continue;
