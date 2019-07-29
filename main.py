@@ -49,7 +49,8 @@ RUN_LOCATIONS = {
         },
     "quicksort" : {
         "py" : [ QUICKSORT_DIR + "py/quicksort.py" ],
-        "java" : [ QUICKSORT_DIR + "java", "QuickSort" ]
+        "java" : [ QUICKSORT_DIR + "java", "QuickSort" ],
+        "rb" : [ QUICKSORT_DIR + "rb/quicksort.rb" ]
         }
     }
 RUN_OPTIONS = {
